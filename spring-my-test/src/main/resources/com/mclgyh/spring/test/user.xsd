@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.mclgyhspring.com/schema/user"
+		xmlns:tns = "http://www.mclgyhspring.com/schema/user"
+		elementFormDefault="qualified"
+		attributeFormDefault="unqualified">
+	<element name="user">
+		<complexType>
+			<attribute name="age" type="int"/>
+			<attribute name="name" type="string" use="required"/>
+			<attribute name="id" type="string" use="required"/>
+		</complexType>
+	</element>
+</schema>

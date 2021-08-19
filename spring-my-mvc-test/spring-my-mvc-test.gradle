@@ -1,0 +1,15 @@
+
+dependencies {
+    compile(project(":spring-context"))
+    compile(project(":spring-beans"))
+    compile(project(":spring-core"))
+    compile(project(":spring-jdbc"))
+    compile(project(":spring-tx"))
+    compile(project(":spring-aop"))
+    compile(project(":spring-context"))
+    compile(project(":spring-aspects"))
+    compile("com.alibaba:druid:1.2.4")
+    compile("mysql:mysql-connector-java:5.1.48")
+    compile(project(":spring-web"))
+    compile(project(":spring-webmvc"))
+}
