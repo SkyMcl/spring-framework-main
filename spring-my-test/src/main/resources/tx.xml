@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+						   http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx.xsd
+">
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="url" value="jdbc:mysql://10.0.0.65:3306/springtest?useUnicode=true"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="Iebt123Iebt"></property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
+	</bean>
+	<bean id="userDao" class="com.mclgyh.spring.tx.dao.UserDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="userService" class="com.mclgyh.spring.tx.service.UserService">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
+	</bean>
+
+	<aop:aspectj-autoproxy/>
+	<aop:config>
+		<aop:pointcut id="tx-advice" expression="execution(* com.mclgyh.spring.tx.*.*.*(..))"/>
+		<aop:advisor advice-ref="tx" pointcut-ref="tx-advice"></aop:advisor>
+	</aop:config>
+	<tx:advice id="tx" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="check" propagation="SUPPORTS" />
+			<tx:method name="updateAge" propagation="NESTED"></tx:method>
+		</tx:attributes>
+	</tx:advice>
+
+</beans>

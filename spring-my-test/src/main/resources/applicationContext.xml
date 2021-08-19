@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:user="http://www.mclgyhspring.com/schema/user"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.mclgyhspring.com/schema/user  http://www.mclgyhspring.com/schema/user/user.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+">
+
+	<bean id="a" class="com.mclgyh.spring.dependens.A" >
+		<property name="b" ref="b"></property>
+	</bean>
+	<bean id = "b" class="com.mclgyh.spring.dependens.B" >
+		<property name="a" ref="a"></property>
+	</bean>
+<!--	<user:user name="张三" age="12" id="person2"></user:user>-->
+
+<!--	<context:component-scan base-package="com.mclgyh.spring"></context:component-scan>-->
+
+<!--<bean class="com.mclgyh.spring.Person" name="person"  >-->
+<!--	<constructor-arg index="0" name="name" type="java.lang.String" value="张三"></constructor-arg>-->
+<!--	<constructor-arg index="1" name="sex" type="java.lang.String" value="M"></constructor-arg>-->
+<!--	<property name="age" value="111"></property>-->
+<!--	<property name="name" value="张三" ></property>-->
+<!--	<property name="sex" value="M" ></property>-->
+<!-- </bean>-->
+
+<!--	<bean name="myEditor" class="com.mclgyh.spring.editor.MyCustomEditor">-->
+<!--		<property name="name" value="张三"></property>-->
+<!--		<property name="address" value="山东_聊城_高唐" ></property>-->
+<!--	</bean>-->
+<!--	//自定义 属性解析器 方法一-->
+<!--	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+<!--		<property name="propertyEditorRegistrars">-->
+<!--			<list>-->
+<!--				<bean class="com.mclgyh.spring.editor.MyEditorRegistar"></bean>-->
+<!--			</list>-->
+<!--		</property>-->
+<!--	</bean>-->
+	<!--	//自定义 属性解析器 方法二-->
+<!--	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+<!--		<property name="customEditors">-->
+<!--			<map>-->
+<!--				<entry key="com.mclgyh.spring.editor.Address">-->
+<!--					<value>com.mclgyh.spring.editor.MyEditor</value>-->
+<!--				</entry>-->
+<!--			</map>-->
+<!--		</property>-->
+<!--	</bean>-->
+
+</beans>
