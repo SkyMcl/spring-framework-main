@@ -143,10 +143,7 @@ public abstract class BeanUtils {
 			return instantiateClass(clazz.getDeclaredConstructor());
 		}
 		catch (NoSuchMethodException ex) {
-<<<<<<< HEAD
 			// 寻找主构造函数
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			Constructor<T> ctor = findPrimaryConstructor(clazz);
 			if (ctor != null) {
 				return instantiateClass(ctor);
@@ -209,10 +206,7 @@ public abstract class BeanUtils {
 						argsWithDefaultValues[i] = args[i];
 					}
 				}
-<<<<<<< HEAD
 				// 通过构造函数创建对象
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				return ctor.newInstance(argsWithDefaultValues);
 			}
 		}

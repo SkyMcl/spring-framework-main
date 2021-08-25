@@ -100,10 +100,7 @@ public class ContextLoaderListener extends ContextLoader implements ServletConte
 	 */
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-<<<<<<< HEAD
 		// springmvc 初始化
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		initWebApplicationContext(event.getServletContext());
 	}
 

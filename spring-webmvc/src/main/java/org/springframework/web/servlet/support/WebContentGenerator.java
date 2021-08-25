@@ -398,20 +398,14 @@ public abstract class WebContentGenerator extends WebApplicationObjectSupport {
 			if (logger.isTraceEnabled()) {
 				logger.trace("Applying default " + getCacheControl());
 			}
-<<<<<<< HEAD
 			// 设置cache-Control
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			applyCacheControl(response, this.cacheControl);
 		}
 		else {
 			if (logger.isTraceEnabled()) {
 				logger.trace("Applying default cacheSeconds=" + this.cacheSeconds);
 			}
-<<<<<<< HEAD
 			// 进行缓存 一定秒数
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			applyCacheSeconds(response, this.cacheSeconds);
 		}
 		if (this.varyByRequestHeaders != null) {

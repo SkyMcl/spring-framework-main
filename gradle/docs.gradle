@@ -231,22 +231,14 @@ task schemaZip(type: Zip) {
 		def Properties schemas = new Properties();
 
 		module.sourceSets.main.resources.find {
-<<<<<<< HEAD
 			(it.path.endsWith("META-INF/spring.schemas"))
-=======
-			(it.path.endsWith("META-INF/spring.schemas") || it.path.endsWith("META-INF\\spring.schemas"))
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		}?.withInputStream { schemas.load(it) }
 
 		for (def key : schemas.keySet()) {
 			def shortName = key.replaceAll(/http.*schema.(.*).spring-.*/, '$1')
 			assert shortName != key
 			File xsdFile = module.sourceSets.main.resources.find {
-<<<<<<< HEAD
 				( it.path.endsWith(schemas.get(key).replaceAll('\\/','\\\\')) || it.path.endsWith(schemas.get(key)))
-=======
-				(it.path.endsWith(schemas.get(key)) || it.path.endsWith(schemas.get(key).replaceAll('\\/','\\\\')))
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			}
 			assert xsdFile != null
 			into (shortName) {

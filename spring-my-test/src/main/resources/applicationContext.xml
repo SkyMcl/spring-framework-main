@@ -14,10 +14,7 @@
 	<bean id = "b" class="com.mclgyh.spring.dependens.B" >
 		<property name="a" ref="a"></property>
 	</bean>
-<<<<<<< HEAD
 	<bean id="myApplicationContextAware" class="com.mclgyh.spring.test.MyApplicationContextAware"></bean>
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 <!--	<user:user name="张三" age="12" id="person2"></user:user>-->
 
 <!--	<context:component-scan base-package="com.mclgyh.spring"></context:component-scan>-->

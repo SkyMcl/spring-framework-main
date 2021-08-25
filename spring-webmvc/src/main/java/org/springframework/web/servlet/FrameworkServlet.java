@@ -524,17 +524,11 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 		if (logger.isInfoEnabled()) {
 			logger.info("Initializing Servlet '" + getServletName() + "'");
 		}
-<<<<<<< HEAD
 		// 记录开始时间
 		long startTime = System.currentTimeMillis();
 
 		try {
 			// 初始化webApplicationContext
-=======
-		long startTime = System.currentTimeMillis();
-
-		try {
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			this.webApplicationContext = initWebApplicationContext();
 			initFrameworkServlet();
 		}
@@ -566,10 +560,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	 * @see #setContextConfigLocation
 	 */
 	protected WebApplicationContext initWebApplicationContext() {
-<<<<<<< HEAD
 		// 获取webApplicationContext 根对象
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		WebApplicationContext rootContext =
 				WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		WebApplicationContext wac = null;
@@ -579,10 +570,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 			wac = this.webApplicationContext;
 			if (wac instanceof ConfigurableWebApplicationContext) {
 				ConfigurableWebApplicationContext cwac = (ConfigurableWebApplicationContext) wac;
-<<<<<<< HEAD
 				// 判断根webApplicationContext对象是否刷新过
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				if (!cwac.isActive()) {
 					// The context has not yet been refreshed -> provide services such as
 					// setting the parent context, setting the application context id, etc
@@ -591,10 +579,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 						// the root application context (if any; may be null) as the parent
 						cwac.setParent(rootContext);
 					}
-<<<<<<< HEAD
 					// 没有刷新过 进行刷新
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 					configureAndRefreshWebApplicationContext(cwac);
 				}
 			}
@@ -703,7 +688,6 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 						ObjectUtils.getDisplayString(getServletContext().getContextPath()) + '/' + getServletName());
 			}
 		}
-<<<<<<< HEAD
 		// 设置servlet 对象
 		wac.setServletContext(getServletContext());
 		// 设置servlet 配置
@@ -711,36 +695,21 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 		// 设置命名空间
 		wac.setNamespace(getNamespace());
 		// 添加监听器ContextRefreshListener  被调用后执行 子类DispatcherServlet的onRefresh 方法 完成初始化9大组件
-=======
-
-		wac.setServletContext(getServletContext());
-		wac.setServletConfig(getServletConfig());
-		wac.setNamespace(getNamespace());
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		wac.addApplicationListener(new SourceFilteringListener(wac, new ContextRefreshListener()));
 
 		// The wac environment's #initPropertySources will be called in any case when the context
 		// is refreshed; do it eagerly here to ensure servlet property sources are in place for
 		// use in any post-processing or initialization that occurs below prior to #refresh
-<<<<<<< HEAD
 		// 获取环境变量
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		ConfigurableEnvironment env = wac.getEnvironment();
 		if (env instanceof ConfigurableWebEnvironment) {
 			((ConfigurableWebEnvironment) env).initPropertySources(getServletContext(), getServletConfig());
 		}
-<<<<<<< HEAD
 		// 扩展使用 在刷新上下文之前 调用
 		postProcessWebApplicationContext(wac);
 		// 应用初始化
 		applyInitializers(wac);
 		// 进行刷新 创建springmcv 容器
-=======
-
-		postProcessWebApplicationContext(wac);
-		applyInitializers(wac);
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		wac.refresh();
 	}
 
@@ -902,10 +871,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	 */
 	@Override
 	public void destroy() {
-<<<<<<< HEAD
 		// 执行销毁操作
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		getServletContext().log("Destroying Spring FrameworkServlet '" + getServletName() + "'");
 		// Only call close() on WebApplicationContext if locally managed...
 		if (this.webApplicationContext instanceof ConfigurableApplicationContext && !this.webApplicationContextInjected) {
@@ -920,12 +886,8 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-<<<<<<< HEAD
 		// 请求的核心
 		// 判断请求的方法 PATCH POST GET DELETE ...
-=======
-
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		HttpMethod httpMethod = HttpMethod.resolve(request.getMethod());
 		if (httpMethod == HttpMethod.PATCH || httpMethod == null) {
 			processRequest(request, response);
@@ -945,11 +907,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	@Override
 	protected final void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-<<<<<<< HEAD
 		// 进行 访问方式解析
-=======
-
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		processRequest(request, response);
 	}
 
@@ -1042,7 +1000,6 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	 */
 	protected final void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-<<<<<<< HEAD
 		// 记录启动时间
 		long startTime = System.currentTimeMillis();
 		Throwable failureCause = null;
@@ -1062,24 +1019,6 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 
 		try {
 			// 核心步骤 进行请求处理
-=======
-
-		long startTime = System.currentTimeMillis();
-		Throwable failureCause = null;
-
-		LocaleContext previousLocaleContext = LocaleContextHolder.getLocaleContext();
-		LocaleContext localeContext = buildLocaleContext(request);
-
-		RequestAttributes previousAttributes = RequestContextHolder.getRequestAttributes();
-		ServletRequestAttributes requestAttributes = buildRequestAttributes(request, response, previousAttributes);
-
-		WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);
-		asyncManager.registerCallableInterceptor(FrameworkServlet.class.getName(), new RequestBindingInterceptor());
-
-		initContextHolders(request, localeContext, requestAttributes);
-
-		try {
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			doService(request, response);
 		}
 		catch (ServletException | IOException ex) {
@@ -1092,19 +1031,13 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 		}
 
 		finally {
-<<<<<<< HEAD
 			// 释放对象持有器
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			resetContextHolders(request, previousLocaleContext, previousAttributes);
 			if (requestAttributes != null) {
 				requestAttributes.requestCompleted();
 			}
 			logResult(request, response, failureCause, asyncManager);
-<<<<<<< HEAD
 			// 发布请求处理事件
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			publishRequestHandledEvent(request, response, startTime, failureCause);
 		}
 	}

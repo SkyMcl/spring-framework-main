@@ -246,38 +246,24 @@ public abstract class ClassUtils {
 			throws ClassNotFoundException, LinkageError {
 
 		Assert.notNull(name, "Name must not be null");
-<<<<<<< HEAD
 		// 尝试解析类名为 原始的类型
 		Class<?> clazz = resolvePrimitiveClassName(name);
 		if (clazz == null) {
 			// 通过常规的类缓存尝试获取当前类的对象
-=======
-
-		Class<?> clazz = resolvePrimitiveClassName(name);
-		if (clazz == null) {
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			clazz = commonClassCache.get(name);
 		}
 		if (clazz != null) {
 			return clazz;
 		}
 
-<<<<<<< HEAD
 		// "java.lang.String[]" style arrays 判断是否是数组 以[]结尾
-=======
-		// "java.lang.String[]" style arrays
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		if (name.endsWith(ARRAY_SUFFIX)) {
 			String elementClassName = name.substring(0, name.length() - ARRAY_SUFFIX.length());
 			Class<?> elementClass = forName(elementClassName, classLoader);
 			return Array.newInstance(elementClass, 0).getClass();
 		}
 
-<<<<<<< HEAD
 		// "[Ljava.lang.String;" style arrays 判断是否是数组 以[L开头
-=======
-		// "[Ljava.lang.String;" style arrays
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		if (name.startsWith(NON_PRIMITIVE_ARRAY_PREFIX) && name.endsWith(";")) {
 			String elementName = name.substring(NON_PRIMITIVE_ARRAY_PREFIX.length(), name.length() - 1);
 			Class<?> elementClass = forName(elementName, classLoader);
@@ -296,10 +282,7 @@ public abstract class ClassUtils {
 			clToUse = getDefaultClassLoader();
 		}
 		try {
-<<<<<<< HEAD
 			// 以上都没有获得  直接 通过反射获取对象
-=======
->>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			return Class.forName(name, false, clToUse);
 		}
 		catch (ClassNotFoundException ex) {
