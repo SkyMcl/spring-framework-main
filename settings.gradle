@@ -37,7 +37,10 @@ include "spring-websocket"
 include "framework-bom"
 include "integration-tests"
 include "spring-my-test"
+<<<<<<< HEAD
 include "spring-my-mvc-test"
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 
 rootProject.name = "spring"
 rootProject.children.each {project ->
@@ -59,4 +62,7 @@ settings.gradle.projectsLoaded {
 	}
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2

@@ -790,6 +790,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 		checkRequest(request);
 
 		// Execute invokeHandlerMethod in synchronized block if required.
+<<<<<<< HEAD
 		// 判断是否是会话同步的
 		if (this.synchronizeOnSession) {
 			// 获取当前session
@@ -799,17 +800,28 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 				Object mutex = WebUtils.getSessionMutex(session);
 				synchronized (mutex) {
 					// 加锁后 进行handler 映射调用
+=======
+		if (this.synchronizeOnSession) {
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				Object mutex = WebUtils.getSessionMutex(session);
+				synchronized (mutex) {
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 					mav = invokeHandlerMethod(request, response, handlerMethod);
 				}
 			}
 			else {
 				// No HttpSession available -> no mutex necessary
+<<<<<<< HEAD
 				// 没有session 则为第一次访问 进行handler映射调用
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				mav = invokeHandlerMethod(request, response, handlerMethod);
 			}
 		}
 		else {
 			// No synchronization on session demanded at all...
+<<<<<<< HEAD
 			// 不需要会话同步  进行handler映射调用
 			mav = invokeHandlerMethod(request, response, handlerMethod);
 		}
@@ -821,6 +833,16 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			}
 			else {
 				// 准备response
+=======
+			mav = invokeHandlerMethod(request, response, handlerMethod);
+		}
+
+		if (!response.containsHeader(HEADER_CACHE_CONTROL)) {
+			if (getSessionAttributesHandler(handlerMethod).hasSessionAttributes()) {
+				applyCacheSeconds(response, this.cacheSecondsForSessionAttributeHandlers);
+			}
+			else {
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				prepareResponse(response);
 			}
 		}
@@ -859,6 +881,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 	@Nullable
 	protected ModelAndView invokeHandlerMethod(HttpServletRequest request,
 			HttpServletResponse response, HandlerMethod handlerMethod) throws Exception {
+<<<<<<< HEAD
 		// 创建servletRequet 对象
 		ServletWebRequest webRequest = new ServletWebRequest(request, response);
 		try {
@@ -869,6 +892,15 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 
 			ServletInvocableHandlerMethod invocableMethod = createInvocableHandlerMethod(handlerMethod);
 			// 设置一些属性值
+=======
+
+		ServletWebRequest webRequest = new ServletWebRequest(request, response);
+		try {
+			WebDataBinderFactory binderFactory = getDataBinderFactory(handlerMethod);
+			ModelFactory modelFactory = getModelFactory(handlerMethod, binderFactory);
+
+			ServletInvocableHandlerMethod invocableMethod = createInvocableHandlerMethod(handlerMethod);
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			if (this.argumentResolvers != null) {
 				invocableMethod.setHandlerMethodArgumentResolvers(this.argumentResolvers);
 			}
@@ -877,7 +909,11 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			}
 			invocableMethod.setDataBinderFactory(binderFactory);
 			invocableMethod.setParameterNameDiscoverer(this.parameterNameDiscoverer);
+<<<<<<< HEAD
 			// 创建ModelAndView 对象
+=======
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			ModelAndViewContainer mavContainer = new ModelAndViewContainer();
 			mavContainer.addAllAttributes(RequestContextUtils.getInputFlashMap(request));
 			modelFactory.initModel(webRequest, mavContainer, invocableMethod);
@@ -885,7 +921,11 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 
 			AsyncWebRequest asyncWebRequest = WebAsyncUtils.createAsyncWebRequest(request, response);
 			asyncWebRequest.setTimeout(this.asyncRequestTimeout);
+<<<<<<< HEAD
 			// 创建异步管理器 对象
+=======
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);
 			asyncManager.setTaskExecutor(this.taskExecutor);
 			asyncManager.setAsyncWebRequest(asyncWebRequest);
@@ -902,12 +942,20 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 				});
 				invocableMethod = invocableMethod.wrapConcurrentResult(result);
 			}
+<<<<<<< HEAD
 			// 核心步骤 进行反射执行 对应的处理方法
+=======
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			invocableMethod.invokeAndHandle(webRequest, mavContainer);
 			if (asyncManager.isConcurrentHandlingStarted()) {
 				return null;
 			}
+<<<<<<< HEAD
 			// 返回ModelAndView 对象
+=======
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			return getModelAndView(mavContainer, modelFactory, webRequest);
 		}
 		finally {

@@ -71,7 +71,11 @@ public class ServletWebRequest extends ServletRequestAttributes implements Nativ
 	};
 
 	private static final TimeZone GMT = TimeZone.getTimeZone("GMT");
+<<<<<<< HEAD
 	// 是否未修改
+=======
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 	private boolean notModified = false;
 
 

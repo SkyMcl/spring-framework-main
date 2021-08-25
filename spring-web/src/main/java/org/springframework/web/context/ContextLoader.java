@@ -139,7 +139,11 @@ public class ContextLoader {
 		// Load default strategy implementations from properties file.
 		// This is currently strictly internal and not meant to be customized
 		// by application developers.
+<<<<<<< HEAD
 		try {// 确定默认策略  获取ContextLoader.properties 内置的启动上下文 WebApplicationContext=XmlWebApplicationContext
+=======
+		try {
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			ClassPathResource resource = new ClassPathResource(DEFAULT_STRATEGIES_PATH, ContextLoader.class);
 			defaultStrategies = PropertiesLoaderUtils.loadProperties(resource);
 		}
@@ -259,7 +263,10 @@ public class ContextLoader {
 	 * @see #CONFIG_LOCATION_PARAM
 	 */
 	public WebApplicationContext initWebApplicationContext(ServletContext servletContext) {
+<<<<<<< HEAD
 		// 判断是否存在webApplicationContext.root的属性值 存在就抛出异常
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		if (servletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null) {
 			throw new IllegalStateException(
 					"Cannot initialize context because there is already a root application context present - " +
@@ -271,12 +278,16 @@ public class ContextLoader {
 		if (logger.isInfoEnabled()) {
 			logger.info("Root WebApplicationContext: initialization started");
 		}
+<<<<<<< HEAD
 		// 记录启动时间
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		long startTime = System.currentTimeMillis();
 
 		try {
 			// Store context in local instance variable, to guarantee that
 			// it is available on ServletContext shutdown.
+<<<<<<< HEAD
 			// 初始化context对象保证servletContext对象在销毁的时候可以使用它
 			if (this.context == null) {
 				// 创建webApplicationContext 对象
@@ -286,6 +297,13 @@ public class ContextLoader {
 			if (this.context instanceof ConfigurableWebApplicationContext) {
 				ConfigurableWebApplicationContext cwac = (ConfigurableWebApplicationContext) this.context;
 				// 判断context对象是否是刷新过的
+=======
+			if (this.context == null) {
+				this.context = createWebApplicationContext(servletContext);
+			}
+			if (this.context instanceof ConfigurableWebApplicationContext) {
+				ConfigurableWebApplicationContext cwac = (ConfigurableWebApplicationContext) this.context;
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				if (!cwac.isActive()) {
 					// The context has not yet been refreshed -> provide services such as
 					// setting the parent context, setting the application context id, etc
@@ -295,6 +313,7 @@ public class ContextLoader {
 						ApplicationContext parent = loadParentContext(servletContext);
 						cwac.setParent(parent);
 					}
+<<<<<<< HEAD
 					// 如果当前Context对象没有刷新过，则进行refresh 创建spring 容器
 					configureAndRefreshWebApplicationContext(cwac, servletContext);
 				}
@@ -302,6 +321,13 @@ public class ContextLoader {
 			// 设置根 对象
 			servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, this.context);
 			// 获取当前的类加载器
+=======
+					configureAndRefreshWebApplicationContext(cwac, servletContext);
+				}
+			}
+			servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, this.context);
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			ClassLoader ccl = Thread.currentThread().getContextClassLoader();
 			if (ccl == ContextLoader.class.getClassLoader()) {
 				currentContext = this.context;
@@ -337,13 +363,19 @@ public class ContextLoader {
 	 * @see ConfigurableWebApplicationContext
 	 */
 	protected WebApplicationContext createWebApplicationContext(ServletContext sc) {
+<<<<<<< HEAD
 		// 获取定义的contextClass 类型
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		Class<?> contextClass = determineContextClass(sc);
 		if (!ConfigurableWebApplicationContext.class.isAssignableFrom(contextClass)) {
 			throw new ApplicationContextException("Custom context class [" + contextClass.getName() +
 					"] is not of type [" + ConfigurableWebApplicationContext.class.getName() + "]");
 		}
+<<<<<<< HEAD
 		// 进行初始化
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		return (ConfigurableWebApplicationContext) BeanUtils.instantiateClass(contextClass);
 	}
 
@@ -356,11 +388,17 @@ public class ContextLoader {
 	 * @see org.springframework.web.context.support.XmlWebApplicationContext
 	 */
 	protected Class<?> determineContextClass(ServletContext servletContext) {
+<<<<<<< HEAD
 		// 判断有没有在web。xml内配置contextClass 属性
 		String contextClassName = servletContext.getInitParameter(CONTEXT_CLASS_PARAM);
 		if (contextClassName != null) {
 			try {
 				// 不为空则通过反射 获取指定的 webApplicationContext对象
+=======
+		String contextClassName = servletContext.getInitParameter(CONTEXT_CLASS_PARAM);
+		if (contextClassName != null) {
+			try {
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				return ClassUtils.forName(contextClassName, ClassUtils.getDefaultClassLoader());
 			}
 			catch (ClassNotFoundException ex) {
@@ -369,10 +407,15 @@ public class ContextLoader {
 			}
 		}
 		else {
+<<<<<<< HEAD
 			//通过默认策略文件ContextLoader.properties 获取默认的 WebApplicationContext对象 = XmlWebApplicationContext
 			contextClassName = defaultStrategies.getProperty(WebApplicationContext.class.getName());
 			try {
 				//Class.forName 通过反射加载 指定类到内存内
+=======
+			contextClassName = defaultStrategies.getProperty(WebApplicationContext.class.getName());
+			try {
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				return ClassUtils.forName(contextClassName, ContextLoader.class.getClassLoader());
 			}
 			catch (ClassNotFoundException ex) {
@@ -386,21 +429,32 @@ public class ContextLoader {
 		if (ObjectUtils.identityToString(wac).equals(wac.getId())) {
 			// The application context id is still set to its original default value
 			// -> assign a more useful id based on available information
+<<<<<<< HEAD
 			// 判断web配置文件内是否存在contextId属性
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			String idParam = sc.getInitParameter(CONTEXT_ID_PARAM);
 			if (idParam != null) {
 				wac.setId(idParam);
 			}
 			else {
 				// Generate default id...
+<<<<<<< HEAD
 				// 不存在 则生成唯一ID
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				wac.setId(ConfigurableWebApplicationContext.APPLICATION_CONTEXT_ID_PREFIX +
 						ObjectUtils.getDisplayString(sc.getContextPath()));
 			}
 		}
+<<<<<<< HEAD
 		// 设置servletContext
 		wac.setServletContext(sc);
 		// 判断web配置文件内是否存在contextConfigLocation属性
+=======
+
+		wac.setServletContext(sc);
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		String configLocationParam = sc.getInitParameter(CONFIG_LOCATION_PARAM);
 		if (configLocationParam != null) {
 			wac.setConfigLocation(configLocationParam);
@@ -409,14 +463,22 @@ public class ContextLoader {
 		// The wac environment's #initPropertySources will be called in any case when the context
 		// is refreshed; do it eagerly here to ensure servlet property sources are in place for
 		// use in any post-processing or initialization that occurs below prior to #refresh
+<<<<<<< HEAD
 		// 获取环境变量
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		ConfigurableEnvironment env = wac.getEnvironment();
 		if (env instanceof ConfigurableWebEnvironment) {
 			((ConfigurableWebEnvironment) env).initPropertySources(sc, null);
 		}
+<<<<<<< HEAD
 		// 执行自定义方法
 		customizeContext(sc, wac);
 		// 进行刷新
+=======
+
+		customizeContext(sc, wac);
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		wac.refresh();
 	}
 
@@ -438,7 +500,10 @@ public class ContextLoader {
 	 * @see ApplicationContextInitializer#initialize(ConfigurableApplicationContext)
 	 */
 	protected void customizeContext(ServletContext sc, ConfigurableWebApplicationContext wac) {
+<<<<<<< HEAD
 		// 获取对象存在的初始值属性
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		List<Class<ApplicationContextInitializer<ConfigurableApplicationContext>>> initializerClasses =
 				determineContextInitializerClasses(sc);
 
@@ -472,7 +537,11 @@ public class ContextLoader {
 
 		List<Class<ApplicationContextInitializer<ConfigurableApplicationContext>>> classes =
 				new ArrayList<>();
+<<<<<<< HEAD
 		// web.xml是否存在GlobalInitializerClasses 属性
+=======
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		String globalClassNames = servletContext.getInitParameter(GLOBAL_INITIALIZER_CLASSES_PARAM);
 		if (globalClassNames != null) {
 			for (String className : StringUtils.tokenizeToStringArray(globalClassNames, INIT_PARAM_DELIMITERS)) {
@@ -480,7 +549,10 @@ public class ContextLoader {
 			}
 		}
 
+<<<<<<< HEAD
 		// web.xml是否存在contextInitializerClasses 属性
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		String localClassNames = servletContext.getInitParameter(CONTEXT_INITIALIZER_CLASSES_PARAM);
 		if (localClassNames != null) {
 			for (String className : StringUtils.tokenizeToStringArray(localClassNames, INIT_PARAM_DELIMITERS)) {

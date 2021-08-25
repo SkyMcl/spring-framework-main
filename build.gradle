@@ -202,7 +202,11 @@ configure(allprojects) { project ->
 				}
 				entry 'mockito-junit-jupiter'
 			}
+<<<<<<< HEAD
 			dependency "io.mockk:mockk:1.12.0"
+=======
+			dependency "io.mockk:mockk:1.11.0"
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 
 			dependency("net.sourceforge.htmlunit:htmlunit:2.51.0") {
 				exclude group: "commons-logging", name: "commons-logging"
@@ -320,7 +324,10 @@ configure([rootProject] + javaProjects) { project ->
 				apiVersion = "1.3"
 				freeCompilerArgs = ["-Xjsr305=strict", "-Xsuppress-version-warnings", "-Xopt-in=kotlin.RequiresOptIn"]
 				allWarningsAsErrors = true
+<<<<<<< HEAD
 				jvmTarget="11"
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 			}
 		}
 		compileTestKotlin {

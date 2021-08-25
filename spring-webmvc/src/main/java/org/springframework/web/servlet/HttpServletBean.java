@@ -147,6 +147,7 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 	 */
 	@Override
 	public final void init() throws ServletException {
+<<<<<<< HEAD
 		// spring mvc的生命周期 init service destroy
 		// Set bean properties from init parameters.
 		// 获取配置属性
@@ -162,6 +163,17 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 				// 初始化 包装类 可扩展的
 				initBeanWrapper(bw);
 				// 把属性值设置到bean包装类内
+=======
+
+		// Set bean properties from init parameters.
+		PropertyValues pvs = new ServletConfigPropertyValues(getServletConfig(), this.requiredProperties);
+		if (!pvs.isEmpty()) {
+			try {
+				BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(this);
+				ResourceLoader resourceLoader = new ServletContextResourceLoader(getServletContext());
+				bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader, getEnvironment()));
+				initBeanWrapper(bw);
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				bw.setPropertyValues(pvs, true);
 			}
 			catch (BeansException ex) {
@@ -173,7 +185,10 @@ public abstract class HttpServletBean extends HttpServlet implements Environment
 		}
 
 		// Let subclasses do whatever initialization they like.
+<<<<<<< HEAD
 		// 初始化servletBean
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 		initServletBean();
 	}
 

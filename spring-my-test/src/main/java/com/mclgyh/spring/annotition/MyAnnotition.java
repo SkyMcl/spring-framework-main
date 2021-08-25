@@ -1,17 +1,24 @@
 package com.mclgyh.spring.annotition;
 
+<<<<<<< HEAD
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+=======
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 /**
  * @Author: 牟春雷
  * @Description:
  * @Date: 17:22 2021/7/29
  * @Modified By:
  **/
+<<<<<<< HEAD
 
 public class MyAnnotition {
 
@@ -25,4 +32,15 @@ public class MyAnnotition {
 		String value = annotation.value();
 		System.out.println("value = "+value);
 	}
+=======
+@Component
+public class MyAnnotition {
+
+	@Configuration
+	@Component
+	class MyChild{
+
+	}
+
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 }

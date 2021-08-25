@@ -175,7 +175,10 @@ public class HandlerExecutionChain {
 		for (int i = this.interceptorIndex; i >= 0; i--) {
 			HandlerInterceptor interceptor = this.interceptorList.get(i);
 			try {
+<<<<<<< HEAD
 				// 执行所有的拦截器的完成后执行的方法
+=======
+>>>>>>> b441c4e07c829610ea8c8b19abf7dd86ef197ad2
 				interceptor.afterCompletion(request, response, this.handler, ex);
 			}
 			catch (Throwable ex2) {
